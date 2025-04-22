@@ -14,8 +14,8 @@ router.get('/buscar/:identificacion', (req, res) => {
     console.log("ID a buscar: ", identificacion, typeof identificacion);
 
     const query = 'SELECT nombre, identificacion FROM registro_civil WHERE identificacion = ?';
-    
-    connection.query(query, [identificacion], (err, results) => {
+
+    pool.query(query, [identificacion], (err, results) => {
         if (err) {
             console.error('Error al buscar en la base de datos:', err);
             return res.status(500).json({ success: false, message: 'Error interno del servidor' });
@@ -38,7 +38,6 @@ router.get('/buscar/:identificacion', (req, res) => {
         }
     });
 });
-
 
 
 // Ruta para registrar un nuevo usuario si no existe
