@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const connection = require('../configdb'); // Importamos la conexión a la base de datos
+const pool = require('../configdb'); // Importamos correctamente el pool de conexiones
 
 // Ruta de prueba para verificar que la API funciona
 router.get('/', (req, res) => {
@@ -38,7 +38,6 @@ router.get('/buscar/:identificacion', (req, res) => {
         }
     });
 });
-
 
 // Ruta para registrar un nuevo usuario si no existe
 router.post('/registrar', (req, res) => {
