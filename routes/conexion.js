@@ -11,10 +11,9 @@ router.get('/', (req, res) => {
 router.get('/buscar/:identificacion', (req, res) => {
     const { identificacion } = req.params;
 
-    // Verificar que la identificación se pasa correctamente
-    console.log("ID a buscar: ", identificacion);
+    console.log("ID a buscar: ", identificacion, typeof identificacion);
 
-    const query = 'SELECT nombre FROM registro_civil WHERE identificacion = ?';
+    const query = 'SELECT nombre, identificacion FROM registro_civil WHERE identificacion = ?';
     
     connection.query(query, [identificacion], (err, results) => {
         if (err) {
@@ -27,7 +26,8 @@ router.get('/buscar/:identificacion', (req, res) => {
             return res.status(200).json({
                 success: true,
                 message: 'Usuario encontrado',
-                nombre: results[0].nombre
+                nombre: results[0].nombre,
+                identificacion: results[0].identificacion
             });
         } else {
             console.log('Usuario no encontrado');
